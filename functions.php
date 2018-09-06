@@ -36,6 +36,7 @@ class AmpSite {
 	function __construct() {
 		add_action('amp_meta', array($this, 'add_meta'));
 		add_filter('amp_post_template_analytics', array($this, 'add_analytics'));
+		add_filter('amp_gallery_image_params', array($this, 'set_gallery_slide_params'), 10, 1);
 	}
 
 	function add_meta($amp) {
@@ -55,6 +56,18 @@ class AmpSite {
 		$analytics['amp-gtm-googleanalytics'] = $ga;
 		console_dump($analytics);
 		return $analytics;
+	}
+
+	function set_gallery_slide_params($image) {
+
+		$resize_width = 800;
+		$url_key = 'url';
+		$crop_url = $image[$url_key];
+		$image[$url_key] = Timber::compile_string('{{url | resize ( width ) }}',
+			array ( 'url'  => $crop_url, 'width' => $resize_width) );
+		$image['height'] = $image['height'] * ( $image['width']  / $resize_width );
+		$image['width'] = $resize_width;
+		return $image;
 	}
 }
 
