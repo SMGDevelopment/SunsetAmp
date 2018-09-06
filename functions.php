@@ -63,10 +63,18 @@ class AmpSite {
 		$resize_width = 800;
 		$url_key = 'url';
 		$crop_url = $image[$url_key];
-		$image[$url_key] = Timber::compile_string('{{url | resize ( width ) }}',
-			array ( 'url'  => $crop_url, 'width' => $resize_width) );
-		$image['height'] = $image['height'] * ( $image['width']  / $resize_width );
-		$image['width'] = $resize_width;
+		$r_w = $image['width'];
+		$r_w = $r_w >= 600 ? $r_w : 600;
+		$r_h = $image['height'];
+		$r_h = $r_h >= 400 ? $r_h : 400;
+
+		$image[$url_key] = Timber::compile_string('{{url | resize ( width, height ) }}',
+			array ( 'url'  => $crop_url, 'width' => $r_w, 'height' => $r_h));
+
+		$image['width'] = $r_w;
+		$image['height'] = $r_h;
+
+		console_dump($image);
 		return $image;
 	}
 }
