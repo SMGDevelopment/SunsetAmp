@@ -5,6 +5,7 @@ require_once( AMP__DIR__ . '/includes/embeds/class-amp-gallery-embed.php' );
 class Sunset_AMP_Gallery_Embed_Handler extends AMP_Gallery_Embed_Handler {
 	private static $script_slug = 'amp-carousel';
 	private static $script_src = 'https://cdn.ampproject.org/v0/amp-carousel-0.1.js';
+	private static $carousel_height = 980;
 
 	public function register_embed() {
 		add_shortcode( 'gallery', array( $this, 'shortcode' ) );
@@ -150,7 +151,10 @@ class Sunset_AMP_Gallery_Embed_Handler extends AMP_Gallery_Embed_Handler {
 
 		$timber =  new TimberImage($image['id']);
 		$index = $index + 1;
-		return '<figcaption><span class=slide-info><span class=counter>' . $index . ' / ' . $total . '</span><span class=credit>' . $timber->credits . '</span></span><h2>' . $timber->headline . '</h2>' .$timber->deck . '</figcaption>';
+
+		return '<figcaption class="caption scroll-box"><span class=slide-info><span class=counter>' . $index . ' / ' . $total . '</span><span class=credit>' . $timber->credits . '</span></span><h2>' . $timber->headline . '</h2>' . 
+			AMP_HTML_Utils::build_tag('p', array(
+			), $timber->deck ) . '</figcaption>';
 	}
 
 	private function build_gallery_slide($image, $index, $total) {
