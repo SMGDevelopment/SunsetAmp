@@ -81,14 +81,14 @@ class AmpSite {
 	function set_gallery_slide_params($image) {
 
 		$url_key = 'url';
-		$max_width = $image['args']['width'];
+		$max_height = $image['args']['height'];
 		$crop_url = $image[$url_key];
 
-		$r_w = $max_width;
-		$r_h = $r_w / ( $image['width'] / $image['height'] );
+		$r_h = $max_height;
+		$r_w = $r_h / ( $image['width'] / $image['height'] );
 
-		$image[$url_key] = Timber::compile_string('{{url | resize ( width ) }}',
-			array ( 'url'  => $crop_url, 'width' => $r_w, 'height' => $r_h ));
+		$image[$url_key] = Timber::compile_string('{{url | resize ( width, height ) }}',
+			array ( 'url'  => $crop_url, 'width' => null, 'height' => $r_h ));
 
 		$image['width'] = $r_w;
 		$image['height'] = $r_h;
