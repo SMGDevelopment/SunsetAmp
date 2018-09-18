@@ -256,6 +256,44 @@
         font-size: 12px;
         text-align: center;
     }
+    figcaption .credit {
+        font-family: "Open Sans", Helvetica, sans-serif;
+        color: #686c73;
+        font-size: 11px;
+        margin-left: 0px;
+        padding-left: 8px;
+    }
+    figcaption h2 {
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 10px;
+        line-height: 1.2em;
+        margin-top: 0.3em;
+        letter-spacing: 0.3px;
+    }
+
+    figcaption .slide-info .counter {
+        font-family: "Open Sans", Helvetica, sans-serif;
+        font-size: 12px;
+        font-style: italic;
+        font-weight: 700;
+    }
+
+    h1.amp-post-title {
+        font-family: "Merriweather", Times, serif;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 30px;
+    }
+
+    .header .left {
+        margin: 16px 0 0 35%;
+    }
+
+    .header .amp-logo h1 { display: none; }
+    .header .amp-logo {
+        width: auto;
+    }
 
 
 /****
