@@ -118,16 +118,16 @@ class Sunset_AMP_Gallery_Embed_Handler extends AMP_Gallery_Embed_Handler {
 		$height = $this->args['height'];
 		$index = 0;
 		$total = count($args['images']);
+		$height += 500;
 
 		foreach ( $args['images'] as $key => $image ) {
-			$captions[] = $this->build_gallery_caption($image, $index, $total);
-			$slide = $this->build_gallery_slide($image);
+			$slide = $this->build_gallery_slide($image, $index, $total);
 			$images[$key] = apply_filters('amp_gallery_images', $slide, $image);
 			$index++;
 		};
 
 		$attributes = array(
-			'height' => $this->args['height'], 
+			'height' => $height,
 			'width' => $this->args['width'], 
 			'layout' => 'responsive',
 			'type' => 'slides',
@@ -140,15 +140,9 @@ class Sunset_AMP_Gallery_Embed_Handler extends AMP_Gallery_Embed_Handler {
 			$carousel_attributes[] = sprintf('%s="%s" ', $key, $value);
 		}
 
-		return '<amp-carousel [slide]="selectedSlide"></amp-carousel><amp-carousel [slide]="selectedSlide" id="gallery-images"' .  implode(' ', $carousel_attributes) .'">' .
+		return '<amp-carousel [slide]="selectedSlide" id="gallery-images"' .  implode(' ', $carousel_attributes) .'">' .
 				implode( PHP_EOL, $images ) .
-			'</amp-carousel>' .
-			'<amp-carousel id="gallery-captions" on="slideChange:AMP.setState({selectedSlide: event.index})" height="500" [slide]="selectedSlide" type="slides" layout="fixed-height">' .
-				implode( PHP_EOL, $captions ) .
- 		   		'</amp-carousel>'.
-			'<amp-carousel id="gallery-captions" on="slideChange:AMP.setState({selectedSlide: event.index})" height="500" [slide]="selectedSlide" type="slides" layout="fixed-height">' .
-				implode( PHP_EOL, $captions ) .
- 		   	'</amp-carousel>';
+			'</amp-carousel>'
 				;
 	}
 
@@ -156,11 +150,12 @@ class Sunset_AMP_Gallery_Embed_Handler extends AMP_Gallery_Embed_Handler {
 
 		$timber =  new TimberImage($image['id']);
 		$index = $index + 1;
-		return '<figcaption><span class=slide-info><span class=counter>' . $index . ' / ' . $total . '</span><span class=credit>' . $timber->credits . '</span><h2>' . $timber->headline . '</h2>' .$timber->deck . '</figcaption>';
+		return '<figcaption><span class=slide-info><span class=counter>' . $index . ' / ' . $total . '</span><span class=credit>' . $timber->credits . '</span></span><h2>' . $timber->headline . '</h2>' .$timber->deck . '</figcaption>';
 	}
 
-	private function build_gallery_slide($image) {
+	private function build_gallery_slide($image, $index, $total) {
 
+		$timber = new TimberImage($image['id']);
 		$tag = AMP_HTML_Utils::build_tag(
 			'amp-img',
 			array(
@@ -169,7 +164,7 @@ class Sunset_AMP_Gallery_Embed_Handler extends AMP_Gallery_Embed_Handler {
 				'height' => $image['height'],
 				'layout' => 'intrinsic',
 			)
-		);
-		return $tag;
+		) . $this->build_gallery_caption( $image, $index, $total ); 
+		return '<div class="slide">'. $tag  . '</div>';
 	}
 }
