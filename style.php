@@ -256,6 +256,13 @@
         font-size: 12px;
         text-align: center;
     }
+    amp-carousel figcaption amp-fit-text {
+        max-height: 200px;
+        overflow-y: auto;
+    }
+    #gallery-images .amp-carousel-button {
+        top: 24%;
+    }
     figcaption .credit {
         font-family: "Open Sans", Helvetica, sans-serif;
         color: #686c73;
@@ -294,7 +301,18 @@
     .header .amp-logo {
         width: auto;
     }
+amp-carousel {
+  margin-bottom: 10px;
+}
 
+.caption {
+  padding: 0 10px;
+}
+
+.scroll-box {
+  height: 160px;
+  overflow-y: scroll;
+}
 
 /****
 * RTL Styles
