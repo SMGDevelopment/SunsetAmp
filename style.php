@@ -4,7 +4,7 @@
     body{ font-family: sans-serif; font-size: 16px; line-height:1.4; }
     ol, ul{ list-style-position: inside }
     p, ol, ul, figure{ margin: 0 0 1em; padding: 0; }
-    a, a:active, a:visited{ color:#ed1c24; text-decoration: none }
+    a, a:active, a:visited{ color:#5EBCC2; text-decoration: none }
     a:hover, a:active, a:focus{}
     pre{ white-space: pre-wrap;}
     .left{float:left}
@@ -315,9 +315,38 @@ amp-carousel {
   padding-right: 1vw;
 }
 
+.amp-ad-wrapper {
+    background: #f0f1f2;
+    border-top: 1px solid #d7d7d9;
+    border-bottom: 1px solid #d7d7d9;
+    margin: 8px 0;
+}
 .amp-ad-wrapper amp-ad {
     margin: 4px auto; 
     display: block;
+}
+.related a.eyebrow-link {
+  font-size: 12px;
+  line-height: 16px; 
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #5EBCC2;
+}
+.related a {
+  line-height: 22px;
+  font-size: 16px;
+  margin-bottom: 8px;
+  font-weight: 700;
+  color: #282f2f;
+}
+.media-body img {
+  width: 150px;
+  margin: 0 8px;
+}
+.media-body {
+  float: left;
+  width: calc(100vw - 166px);
+  margin: 0 8px;
 }
 /****
 * RTL Styles
