@@ -5,7 +5,7 @@ add_amp_theme_support('AMP-search');
 //Logo
 add_amp_theme_support('AMP-logo');
 //Social Icons
-add_amp_theme_support('AMP-social-icons');
+//add_amp_theme_support('AMP-social-icons');
 //Menu
 add_amp_theme_support('AMP-menu');
 //Call Now
@@ -13,7 +13,6 @@ add_amp_theme_support('AMP-call-now');
 //Sidebar
 add_amp_theme_support('AMP-sidebar');
 // Featured Image
-add_amp_theme_support('AMP-featured-image');
 //Author box
 add_amp_theme_support('AMP-author-box');
 //Loop
@@ -40,6 +39,7 @@ class AmpSite {
 		add_filter('amp_gallery_image_params', array($this, 'set_gallery_slide_params'), 10, 1);
 		add_filter('amp_content_embed_handlers', array($this, 'set_content_embed_handlers'));
 		add_filter('amp_post_template_data', array($this, 'set_template_data'));
+		add_filter('ampforwp_modify_ads', array($this, 'modify_ads'));
 	}
 
 	function set_template_data($data) {
@@ -88,12 +88,23 @@ class AmpSite {
 		$r_w = $r_h / ( $image['width'] / $image['height'] );
 
 		$image[$url_key] = Timber::compile_string('{{url | resize ( width, height ) }}',
-			array ( 'url'  => $crop_url, 'width' => null, 'height' => $r_h ));
-
+			array ( 'url'  => $crop_url, 'width' => null, 'height' => $r_h )); 
 		$image['width'] = $r_w;
 		$image['height'] = $r_h;
 
 		return $image;
+	}
+
+	function modify_ads($output) {
+		$ads = init_ad_context(new TimberPost);
+
+		$slot = $ads['network_id'] . '/' . $ads['site_name'] . '/' . $ads['zone'];
+		console_dump($ads);
+
+		$output = preg_replace('/type="adsense"/', 'type="doubleclick"', $output);
+		$output = preg_replace('/data-ad-client="[^"]?"/', '', $output);
+		$output = preg_replace('/data-ad-slot="[^"]?"/', 'data-slot="' . $slot . '"', $output);
+		return $output;
 	}
 }
 
