@@ -59,7 +59,6 @@
 .container {
     max-width: 600px;
     margin: 0 auto;
-    padding: 0px 10px;
 }
 
 /****
@@ -310,10 +309,16 @@ amp-carousel {
 }
 
 .scroll-box {
-  height: 160px;
+  max-height: 180px;
   overflow-y: scroll;
+  background: azure;
+  padding-right: 1vw;
 }
 
+.amp-ad-wrapper amp-ad {
+    margin: 4px auto; 
+    display: block;
+}
 /****
 * RTL Styles
 *****/
