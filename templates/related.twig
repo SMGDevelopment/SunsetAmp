@@ -1,0 +1,19 @@
+<ul class=related>
+<h4>You May Like</h4>
+<span class=guid> guid: {{ post.guid}} </span>
+{% for related_post in post.related_stories  %}
+	{%set related_post = TimberPost(related_post)%}
+	{% include 'partial/bottom_recirc_item.twig' with {
+		'post': related_post,
+		'eyebrow': {
+			'link': post.category.link,
+			'headline': post.category.name,
+		},
+		'link': related_post.link,
+		'tout': {
+			'image': related_post.src('square') | resize(125,125),
+			'headline': related_post.tout_headline | default( related_post.title )
+		}
+	} %}
+{% endfor %}
+</ul>

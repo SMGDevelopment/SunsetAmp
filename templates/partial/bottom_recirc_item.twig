@@ -1,0 +1,10 @@
+{% extends "partial/components/bottom_recirc_item/base.twig" %}
+{% set image_url = related_post.thumbnail( 'square' )  %}
+{% if image_url starts with '//' %}
+  {% set image_url = 'https:' ~ image_url %}
+{% endif %}
+{% set image_url = image_url | resize(150,150) %}
+
+{% block recirc_item_image %}
+	<amp-img height="150" width="150" alt="{{related_post.thumbnail.alt|default('')}}" src="{{image_url}}"</amp-img>
+{% endblock recirc_item_image %}
