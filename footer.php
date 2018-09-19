@@ -1,6 +1,5 @@
 </div>
 <footer class="footer container">
-	<?php amp_non_amp_link(); ?>
 </footer>
 
     <amp-sticky-ad layout="nodisplay">
