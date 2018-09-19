@@ -345,7 +345,7 @@ amp-carousel {
 }
 .media-body {
   float: left;
-  width: calc(100vw - 166px);
+  width: calc(100% - 166px);
   margin: 0 8px;
 }
 /****
