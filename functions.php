@@ -30,6 +30,8 @@ add_amp_theme_support('AMP-post-pagination');
 
 amp_font('https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,600|Source+Sans+Pro:400,700');
 require_once(dirname(__FILE__) . '/class-amp-gallery-embed.php');
+define("__GALLLERY_CROP__", "nl_landscape");
+define("__URL_KEY__", "url");
 
 class AmpSite {
 
@@ -80,18 +82,23 @@ class AmpSite {
 
 	function set_gallery_slide_params($image) {
 
-		$url_key = 'url';
-		$max_height = $image['args']['height'];
-		$crop_url = $image[$url_key];
+		$timber = new TimberImage($image[__URL_KEY__]);
+		$w = __AMP_IMAGE_CROP_WIDTH_;
+		$h = __AMP_IMAGE_CROP_HEIGHT__;
 
-		$r_h = $max_height;
-		$r_w = $r_h / ( $image['width'] / $image['height'] );
 
-		$image[$url_key] = Timber::compile_string('{{url | resize ( width, height ) }}',
-			array ( 'url'  => $crop_url, 'width' => null, 'height' => $r_h )); 
-		$image['width'] = $r_w;
-		$image['height'] = $r_h;
+		$crop_url = $timber->src(__GALLLERY_CROP__);
 
+		$image[__URL_KEY__] = Timber::compile_string(
+			'{{url | resize ( width, height ) }}',
+			array (
+				'url'  => $crop_url,
+ 			       	'width' => $w,
+				'height' => $h,
+ 		       	)
+		);
+		$image['width'] = $w;
+		$image['height'] = $h;
 		return $image;
 	}
 

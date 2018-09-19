@@ -1,6 +1,9 @@
 <?php
 
 require_once( AMP__DIR__ . '/includes/embeds/class-amp-gallery-embed.php' );
+define("__AMP_IMAGE_CROP_HEIGHT__", 463);
+define("__AMP_IMAGE_CROP_WIDTH_", 694);
+define("__AMP_CAPTION_HEIGHT__", 210);
 
 class Sunset_AMP_Gallery_Embed_Handler extends AMP_Gallery_Embed_Handler {
 	private static $script_slug = 'amp-carousel';
@@ -116,11 +119,11 @@ class Sunset_AMP_Gallery_Embed_Handler extends AMP_Gallery_Embed_Handler {
 		$images = array();
 		$captions = array();
 
-		$height = $this->args['height'];
-		$index = 0;
-		$total = count($args['images']);
-		$height += 500;
+		$height = __AMP_IMAGE_CROP_HEIGHT__ + (__AMP_CAPTION_HEIGHT__ * 2);
 
+		$total = count($args['images']);
+
+		$index = 0;
 		foreach ( $args['images'] as $key => $image ) {
 			$slide = $this->build_gallery_slide($image, $index, $total);
 			$images[$key] = apply_filters('amp_gallery_images', $slide, $image);
@@ -129,7 +132,7 @@ class Sunset_AMP_Gallery_Embed_Handler extends AMP_Gallery_Embed_Handler {
 
 		$attributes = array(
 			'height' => $height,
-			'width' => $this->args['width'], 
+			'width' => __AMP_IMAGE_CROP_WIDTH_, 
 			'layout' => 'responsive',
 			'type' => 'slides',
 			'controls' => '0',
@@ -166,7 +169,7 @@ class Sunset_AMP_Gallery_Embed_Handler extends AMP_Gallery_Embed_Handler {
 				'src' => $image['url'],
 				'width' => $image['width'],
 				'height' => $image['height'],
-				'layout' => 'intrinsic',
+				'layout' => 'responsive',
 			)
 		) . $this->build_gallery_caption( $image, $index, $total ); 
 		return '<div class="slide">'. $tag  . '</div>';
