@@ -47,6 +47,7 @@ class AmpSite extends TimberSite {
 		add_filter('timber_context', array($this, 'add_to_context'));
 		add_action('ampforwp_above_the_title', array( $this, 'above_title') ); 
 		add_action('ampforwp_before_post_content', array( $this, 'before_content') ); 
+		add_action('ampforwp_global_after_footer', array( $this, 'after_footer') ); 
 		$this->context = Timber::get_context();
 	}
 
@@ -120,7 +121,11 @@ class AmpSite extends TimberSite {
 
 		$post = new TimberPost();
 		$context['post'] = $post; 
-		$context['ad_info'] = init_ad_context($context['post']); 
+		$ads = init_ad_context($context['post']); 
+		$slot = $ads['network_id'] . '/' . $ads['site_name'] . '/' . $ads['zone'];
+		$ads['ad_slot'] = $slot;
+		$context['ad_info'] = $ads;
+
 		$context = $this->add_breadcrumb($context, $post);
 
 		return $context;
@@ -132,6 +137,10 @@ class AmpSite extends TimberSite {
 
 	function before_content() {
 		Timber::render('templates/partial/post-before-content.twig', $this->context);
+	}
+
+	function after_footer() {
+		Timber::render('templates/partial/sticky-ad.twig', $this->context);
 	}
 
 	function add_breadcrumb($context, $post) {
