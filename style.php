@@ -411,8 +411,8 @@ amp-carousel .slide amp-img {
 amp-carousel .slide .caption {
   height: 50%;
 }
-amp-carousel .caption .scroll-box {
-  max-height: calc(100% - (24px + 18px + 16px));
+amp-carousel .caption.scroll-box {
+  max-height: 50%; 
   background: azure;
   padding-right: 1vw;
 }

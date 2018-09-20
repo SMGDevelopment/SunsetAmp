@@ -155,8 +155,8 @@ class Sunset_AMP_Gallery_Embed_Handler extends AMP_Gallery_Embed_Handler {
 		$timber =  new TimberImage($image['id']);
 		$index = $index + 1;
 
-		return '<figcaption class="caption"><span class=slide-info><span class=counter>' . $index . ' / ' . $total . '</span><span class=credit>' . $timber->credits . '</span></span><h2>' . $timber->headline . '</h2>' . 
-			'<div  class=scroll-box> <!-- start deck -->' . $timber->deck. ' <!-- end deck --> </div></figcaption>';
+		return '<figcaption class="scroll-box caption"><span class=slide-info><span class=counter>' . $index . ' / ' . $total . '</span><span class=credit>' . $timber->credits . '</span></span><h2>' . $timber->headline . '</h2>' . 
+			'<div  > <!-- start deck -->' . $timber->deck. ' <!-- end deck --> </div></figcaption>';
 	}
 
 	private function build_gallery_slide($image, $index, $total) {
