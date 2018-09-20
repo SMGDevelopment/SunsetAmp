@@ -155,11 +155,10 @@ class AmpSite extends TimberSite {
 			if($parent->name == null)
 				continue;
 
-			$context['parent_cateogry'] = $parent;
+			$context['parent_category'] = $parent;
 			$context['child_category'] = $term;
 			break;
 		}
-
 		return $context;
 	}
 }
