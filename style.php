@@ -312,10 +312,7 @@ amp-carousel {
 }
 
 .scroll-box {
-  max-height: 180px;
   overflow-y: scroll;
-  background: azure;
-  padding-right: 1vw;
 }
 
 .amp-ad-wrapper {
@@ -399,6 +396,18 @@ amp-carousel {
 }
 .intro.article-info {
   padding: 8px 16px;
+}
+
+amp-carousel .slide amp-img {
+  max-height: 50%;
+}
+amp-carousel .slide .caption {
+  height: 50%;
+}
+amp-carousel .caption .scroll-box {
+  max-height: calc(100% - (24px + 18px + 16px));
+  background: azure;
+  padding-right: 1vw;
 }
 /****
 * RTL Styles
