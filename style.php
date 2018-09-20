@@ -263,7 +263,14 @@
         overflow-y: auto;
     }
     #gallery-images .amp-carousel-button {
-        top: 24%;
+        top: 25%;
+        height: 50%;
+    }
+    #gallery-images .amp-carousel-button-next {
+      right: 0;
+    }
+    #gallery-images .amp-carousel-button-prev {
+      left: 0;
     }
     figcaption .credit {
         font-family: "Open Sans", Helvetica, sans-serif;
