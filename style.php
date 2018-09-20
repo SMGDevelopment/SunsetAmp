@@ -264,7 +264,8 @@
     }
     #gallery-images .amp-carousel-button {
         top: 25%;
-        height: 50%;
+        height: 45%;
+        transform: translate(0, -50%);
     }
     #gallery-images .amp-carousel-button-next {
       right: 0;
@@ -370,6 +371,17 @@ amp-carousel {
     line-height: 16px;
     letter-spacing: 1px;
     text-transform: uppercase;
+
+}
+.breadcrumbs nav ol li:after {
+    content: " ";
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    margin: 0 4px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background-color: #5ebcb6;
 }
 .breadcrumbs nav {
     display: table;
