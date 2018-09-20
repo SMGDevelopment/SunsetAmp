@@ -383,6 +383,9 @@ amp-carousel {
     border-radius: 50%;
     background-color: #5ebcb6;
 }
+.breadcrumbs nav ol li:last-child:after {
+  content: unset;
+}
 .breadcrumbs nav {
     display: table;
     margin: auto;
