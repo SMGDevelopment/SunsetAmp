@@ -136,6 +136,9 @@
     width:190px;
     height:36px;
 }
+.header {
+    border-bottom: 1px solid #d7d7d9;
+}
     .header h1{
         font-size: 1.5em;
     }
@@ -347,6 +350,55 @@ amp-carousel {
   float: left;
   width: calc(100% - 166px);
   margin: 0 8px;
+}
+.amp-post-title {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30px;
+    text-align: center;
+}
+
+.breadcrumbs nav ol li {
+    float: left;
+    color: #5ebcb6;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.breadcrumbs nav {
+    display: table;
+    margin: auto;
+}
+.breadcrumbs nav ol {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.dek {
+    color: #282f2f;
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: bold;
+    text-align: center;
+}
+.padded {
+  padding-left: 24px;
+  padding-right: 24px;
+}
+.author {
+  letter-spacing: 0.5px;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.scale-12 { font-size: 12px; }
+.margin-24-tb {
+  margin: inherit 24px;
+}
+.intro.article-info {
+  padding: 8px 16px;
 }
 /****
 * RTL Styles

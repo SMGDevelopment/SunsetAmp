@@ -45,6 +45,8 @@ class AmpSite extends TimberSite {
 		add_filter('amp_post_template_data', array($this, 'set_template_data'));
 		add_filter('ampforwp_modify_ads', array($this, 'modify_ads'), 10, 1);
 		add_filter('timber_context', array($this, 'add_to_context'));
+		add_action('ampforwp_above_the_title', array( $this, 'above_title') ); 
+		add_action('ampforwp_before_post_content', array( $this, 'before_content') ); 
 		$this->context = Timber::get_context();
 	}
 
@@ -116,8 +118,34 @@ class AmpSite extends TimberSite {
 
 	function add_to_context($context) {
 
-		$context['post'] = new TimberPost;
+		$post = new TimberPost();
+		$context['post'] = $post; 
 		$context['ad_info'] = init_ad_context($context['post']); 
+		$context = $this->add_breadcrumb($context, $post);
+
+		return $context;
+	}
+
+	function above_title() {
+		Timber::render('templates/partial/post-above-title.twig', $this->context);
+	}
+
+	function before_content() {
+		Timber::render('templates/partial/post-before-content.twig', $this->context);
+	}
+
+	function add_breadcrumb($context, $post) {
+		$terms = $post->terms('category');
+		foreach($terms as $term) {
+			$parent = new TimberTerm($term->parent);
+			if($parent->name == null)
+				continue;
+
+			$context['parent_cateogry'] = $parent;
+			$context['child_category'] = $term;
+			break;
+		}
+
 		return $context;
 	}
 }

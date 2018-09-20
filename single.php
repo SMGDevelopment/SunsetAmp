@@ -1,8 +1,8 @@
+<?php global $sunset_amp_site; ?>
 <?php amp_header(); ?>
+<div class="article-info intro">
 <?php amp_title(); ?>
-<?php amp_featured_image();?>
+</div>
 <?php amp_content(); ?>
-<?php amp_post_pagination();?>
-<?php amp_post_navigation();?>
-<?php global $sunset_amp_site; Timber::render('templates/related.twig', $sunset_amp_site->context); ?>
+<?php Timber::render('templates/related.twig', $sunset_amp_site->context); ?>
 <?php amp_footer()?>

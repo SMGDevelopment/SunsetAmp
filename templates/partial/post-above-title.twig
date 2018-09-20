@@ -1,0 +1,27 @@
+      <div class="partial breadcrumbs clearfix ">
+        <nav role="navigation">
+          <ol>
+            <li> <a href="/"><span>Sunset</span></a> </li>
+            {% if child_category.name != null %}
+              {% if parent_category.name != null %}
+                <li>
+                  <a href="/{{parent_category.slug}}">
+                    {{ parent_category.name }}
+                  </a>
+                </li>
+                <li>
+                  <a href="/{{parent_category.slug}}/{{child_category.slug}}">
+                    {{ child_category.name }}
+                  </a>
+                </li>
+              {% else %}
+                <li>
+                  <a href="/{{child_category.slug}}">
+                    {{ child_category.name }}
+                  </a>
+                </li>
+              {% endif %}
+            {% endif %}
+          </ol>
+        </nav>
+      </div>
