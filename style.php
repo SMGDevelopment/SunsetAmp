@@ -431,6 +431,7 @@ amp-carousel .caption.scroll-box {
   background: azure;
   padding-right: 1vw;
 }
+.cooked-direction-number {display: none;}
 /****
 * RTL Styles
 *****/
