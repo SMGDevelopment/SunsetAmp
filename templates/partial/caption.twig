@@ -1,0 +1,14 @@
+<figcaption class="scroll-box caption">
+	{% block caption_info %}
+	<span class=slide-info>
+		<span class=counter>{{index}} / {{total}}</span>
+		<span class=credit>{{credits}}</span>
+	</span>
+	{% endblock caption_info %}
+	{% block caption_headline %}
+	<h2>{{headline}}</h2>
+	{% endblock caption_headline %}
+	{% block caption_deck %}
+	<div class=caption-dek>{{deck}}</div>
+	{% endblock caption_deck %}
+</figcaption>;

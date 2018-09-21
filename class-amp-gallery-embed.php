@@ -155,8 +155,13 @@ class Sunset_AMP_Gallery_Embed_Handler extends AMP_Gallery_Embed_Handler {
 		$timber =  new TimberImage($image['id']);
 		$index = $index + 1;
 
-		return '<figcaption class="scroll-box caption"><span class=slide-info><span class=counter>' . $index . ' / ' . $total . '</span><span class=credit>' . $timber->credits . '</span></span><h2>' . $timber->headline . '</h2>' . 
-			'<div  > <!-- start deck -->' . $timber->deck. ' <!-- end deck --> </div></figcaption>';
+		return Timber::compile('templates/partial/caption.twig', array(
+			'index' => $index,
+			'total' => $total,
+			'credit' => $timber->credits,
+			'headline' => $timber->headline,
+			'deck' => $timber->deck
+		));
 	}
 
 	private function build_gallery_slide($image, $index, $total) {
