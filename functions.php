@@ -49,6 +49,7 @@ class AmpSite extends TimberSite {
 		add_action('ampforwp_before_post_content', array( $this, 'before_content') ); 
 		add_action('ampforwp_global_after_footer', array( $this, 'after_footer') ); 
 		add_action('amp_post_template_head', array($this, 'post_head'));
+		add_filter('amp_post_template_metadata', array($this, 'metadata'));
 		$this->context = Timber::get_context();
 	}
 
@@ -158,6 +159,72 @@ class AmpSite extends TimberSite {
 			break;
 		}
 		return $context;
+	}
+
+	function metadata($metadata, $post = null) {
+
+		$post = new TimberPost($post);
+		if('cp_recipe' != $post->post_type)
+			return $metadata;
+
+		$metadata['@type'] = 'Recipe';
+		$metadata['author'] = $this->get_recipe_author( $post );
+		$metadata['recipeIngredient'] = $this->get_recipe_ingredients($post);
+		$metadata['recipeInstructions'] = $this->get_recipe_instructions($post);
+		$metadata['nutrition'] = $this->get_nutrition($post);
+		$metadata['name'] = $post->name;
+		$r = $post->_recipe_settings;
+		if(array_key_exists('cook_time', $r) && $r['cook_time'])
+			$metadata['cookTime'] = 'PT' . $r['cook_time'] . 'M'; 
+		if(array_key_exists('prep_time', $r) && $r['prep_time'])
+			$metadata['prepTime'] = 'PT' . $r['prep_time'] . 'M'; 
+
+		$metadata['totalTime'] = ($r['cook_time'] + $r['prep_time']) . 'M';
+		$metadata['description'] = strip_tags($r['excerpt']);
+		if($post->thumbnail)
+			$metadata['image'] = array( $post->thumbnail->src );
+
+		console_dump($metadata);
+		return $metadata;
+	}
+
+	function get_recipe_ingredients($post) {
+
+		$recipe = $post->_recipe_settings;
+		$ingredients = array_map(function($i) {
+			return trim($i['name']);
+		}, array_values($recipe['ingredients']));
+
+		return $ingredients;
+	}
+	function get_recipe_instructions($post) {
+
+		$recipe = $post->_recipe_settings;
+		$f = array_filter($recipe['directions'], function($a) {
+			return array_key_exists('content', $a);
+		});
+		$instructions = array_map(function($i) {
+			return array(
+				'@type' => 'HowToStep',
+				'text' => trim(strip_tags($i['content']))
+			);
+		}, array_values($f));
+
+		return $instructions;
+	}
+
+	function get_recipe_author($post) {
+
+		return array(
+			'type' => '@Person',
+			'name' => $post->author
+		);
+	}
+
+	function get_nutrition($post) {
+		$r = $post->_recipe_settings;
+		$nutrition = $r['nutrition'];
+		return array('@type' => 'NutritionInformation', 'calories' => $nutrition['calories']);
 	}
 }
 
