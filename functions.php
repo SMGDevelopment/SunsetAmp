@@ -110,7 +110,7 @@ class AmpSite extends TimberSite {
 	function modify_ads($output) {
 		$ads = $this->context['ad_info']; 
 
-		$slot = $ads['network_id'] . '/' . $ads['site_name'] . '/' . $ads['zone'];
+		$slot = $ads['slot'];
 
 		$output = preg_replace('/type="adsense"/', 'type="doubleclick"', $output);
 		$output = preg_replace('/data-ad-client="[^"]?"/', '', $output);
@@ -123,8 +123,6 @@ class AmpSite extends TimberSite {
 		$post = new TimberPost();
 		$context['post'] = $post; 
 		$ads = init_ad_context($context['post']); 
-		$slot = $ads['network_id'] . '/' . $ads['site_name'] . '/' . $ads['zone'];
-		$ads['ad_slot'] = $slot;
 		$context['ad_info'] = $ads;
 
 		$context = $this->add_breadcrumb($context, $post);
