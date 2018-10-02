@@ -1,3 +1,4 @@
+{%if post.related_stories %}
 <div class=related>
 <h4>You May Like</h4>
 {% for related_post in post.related_stories  %}
@@ -8,3 +9,4 @@
 	} %}
 {% endfor %}
 </div>
+{%endif %}
