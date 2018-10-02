@@ -45,9 +45,9 @@ class AmpSite extends TimberSite {
 		add_filter('amp_post_template_data', array($this, 'set_template_data'));
 		add_filter('ampforwp_modify_ads', array($this, 'modify_ads'), 10, 1);
 		add_filter('timber_context', array($this, 'add_to_context'));
-		add_action('ampforwp_above_the_title', array( $this, 'above_title') ); 
-		add_action('ampforwp_before_post_content', array( $this, 'before_content') ); 
-		add_action('ampforwp_global_after_footer', array( $this, 'after_footer') ); 
+		add_action('ampforwp_above_the_title', array( $this, 'above_title') );
+		add_action('ampforwp_before_post_content', array( $this, 'before_content') );
+		add_action('ampforwp_global_after_footer', array( $this, 'after_footer') );
 		add_action('amp_post_template_head', array($this, 'post_head'));
 		add_filter('amp_post_template_metadata', array($this, 'metadata'));
 		$this->context = Timber::get_context();
@@ -99,9 +99,9 @@ class AmpSite extends TimberSite {
 			'{{url | resize ( width, height ) }}',
 			array (
 				'url'  => $crop_url,
- 			       	'width' => $w,
+				'width' => $w,
 				'height' => $h,
- 		       	)
+			)
 		);
 		$image['width'] = $w;
 		$image['height'] = $h;
@@ -109,7 +109,7 @@ class AmpSite extends TimberSite {
 	}
 
 	function modify_ads($output) {
-		$ads = $this->context['ad_info']; 
+		$ads = $this->context['ad_info'];
 
 		$slot = $ads['slot'];
 
@@ -122,8 +122,8 @@ class AmpSite extends TimberSite {
 	function add_to_context($context) {
 
 		$post = new TimberPost();
-		$context['post'] = $post; 
-		$ads = init_ad_context($context['post']); 
+		$context['post'] = $post;
+		$ads = init_ad_context($context['post']);
 		$context['ad_info'] = $ads;
 
 		$context = $this->add_breadcrumb($context, $post);
@@ -175,9 +175,9 @@ class AmpSite extends TimberSite {
 		$metadata['name'] = $post->name;
 		$r = $post->_recipe_settings;
 		if(array_key_exists('cook_time', $r) && $r['cook_time'])
-			$metadata['cookTime'] = 'PT' . $r['cook_time'] . 'M'; 
+			$metadata['cookTime'] = 'PT' . $r['cook_time'] . 'M';
 		if(array_key_exists('prep_time', $r) && $r['prep_time'])
-			$metadata['prepTime'] = 'PT' . $r['prep_time'] . 'M'; 
+			$metadata['prepTime'] = 'PT' . $r['prep_time'] . 'M';
 
 		$metadata['totalTime'] = ($r['cook_time'] + $r['prep_time']) . 'M';
 		$metadata['description'] = strip_tags($r['excerpt']);
