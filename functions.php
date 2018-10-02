@@ -171,7 +171,6 @@ class AmpSite extends TimberSite {
 		$metadata['author'] = $this->get_recipe_author( $post );
 
 		$r = $post->_recipe_settings;
-		console_dump($r);
 		if(array_key_exists('cook_time', $r) && $r['cook_time'])
 			$metadata['cookTime'] = 'PT' . $r['cook_time'] . 'M';
 
@@ -191,7 +190,6 @@ class AmpSite extends TimberSite {
 		if($post->thumbnail)
 			$metadata['image'] = array( $post->thumbnail->src );
 
-		console_dump($metadata);
 		return $metadata;
 	}
 
