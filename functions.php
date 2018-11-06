@@ -143,6 +143,7 @@ class AmpSite extends TimberSite {
 
 	function before_footer($template) {
 		Timber::render('templates/related.twig', $this->context);
+		Timber::render('templates/outbrain.twig', $this->context);
 	}
 
 	function after_footer() {
