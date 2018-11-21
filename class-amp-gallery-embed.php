@@ -126,7 +126,7 @@ class Sunset_AMP_Gallery_Embed_Handler extends AMP_Gallery_Embed_Handler {
 		$index = 0;
 		foreach ( $args['images'] as $key => $image ) {
 			$slide = $this->build_gallery_slide($image, $index, $total);
-			$images[$key] = apply_filters('amp_gallery_images', $slide, $image);
+			$images[$key] = apply_filters('amp_gallery_images', $slide, $image, array());
 			$index++;
 		};
 
