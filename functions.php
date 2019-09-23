@@ -13,6 +13,7 @@ add_amp_theme_support('AMP-call-now');
 //Sidebar
 add_amp_theme_support('AMP-sidebar');
 // Featured Image
+add_amp_theme_support('AMP-featured-image');
 //Author box
 add_amp_theme_support('AMP-author-box');
 //Loop
@@ -53,6 +54,7 @@ class AmpSite extends TimberSite {
 		add_action('ampforwp_global_after_footer', array( $this, 'after_footer') );
 		add_action('amp_post_template_head', array($this, 'post_head'));
 		add_filter('amp_post_template_metadata', array($this, 'metadata'), 30, 1);
+
 
 		$this->context = Timber::get_context();
 	}
@@ -133,6 +135,8 @@ class AmpSite extends TimberSite {
 		$context['ad_info'] = $ads;
 
 		$context = $this->add_breadcrumb($context, $post);
+    $context['layout'] = $post->terms('layout')[0];
+
 
 		return $context;
 	}
