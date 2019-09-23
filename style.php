@@ -431,6 +431,15 @@ amp-carousel .caption.scroll-box {
   background: azure;
   padding-right: 1vw;
 }
+:root {
+  --content-gutter: 1ch;
+}
+[class^="col-"] {
+  padding: 0 var(--content-gutter); 
+}
+[class^="col-"] amp-carousel {
+  margin: 0 calc(-1 * var(--content-gutter));
+}
 .cooked-direction-number {display: none;}
 /****
 * RTL Styles
