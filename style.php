@@ -138,6 +138,7 @@
 }
 .header {
     border-bottom: 1px solid #d7d7d9;
+  overflow: hidden;
 }
     .header h1{
         font-size: 1.5em;
@@ -417,7 +418,14 @@ amp-carousel {
   margin: inherit 24px;
 }
 .intro.article-info {
-  padding: 8px 16px;
+  padding: 0;
+  margin-top: 11px;
+}
+.intro.article-info h1 {
+margin: 22px 0 0;
+}
+.boldgrid-section {
+margin-top: 11px;
 }
 
 amp-carousel .slide amp-img {
@@ -437,8 +445,15 @@ amp-carousel .caption.scroll-box {
 [class^="col-"] {
   padding: 0 var(--content-gutter); 
 }
-[class^="col-"] amp-carousel {
+[class^="col-"] amp-carousel,
+[class^="col-"] amp-jwplayer
+{
   margin: 0 calc(-1 * var(--content-gutter));
+}
+[class^="col-"] > * + * {
+  margin-top: 22px;
+  margin-bottom: 0;
+  
 }
 .cooked-direction-number {display: none;}
 /****

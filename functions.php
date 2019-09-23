@@ -30,6 +30,8 @@ add_amp_theme_support('AMP-post-pagination');
 
 amp_font('https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,600|Source+Sans+Pro:400,700');
 require_once(dirname(__FILE__) . '/class-amp-gallery-embed.php');
+require_once(dirname(__FILE__) . '/class-amp-jwplayer-embed.php');
+require_once(dirname(__FILE__) . '/../../themes/sunset-magazine/includes/brightcove-override.php');
 define("__GALLLERY_CROP__", "nl_landscape");
 define("__URL_KEY__", "url");
 
@@ -58,6 +60,7 @@ class AmpSite extends TimberSite {
 	function set_template_data($data) {
 		$data['amp_component_scripts']['amp-ad'] = "https://cdn.ampproject.org/v0/amp-ad-0.1.js";
 		$data['amp_component_scripts']['amp-sticky-ad'] = "https://cdn.ampproject.org/v0/amp-sticky-ad-1.0.js";
+		$data['amp_component_scripts']['amp-jwplayer'] = "https://cdn.ampproject.org/v0/amp-jwplayer-0.1.js";
 		return $data;
 	}
 
@@ -67,6 +70,7 @@ class AmpSite extends TimberSite {
 		$galleryHandler = 'Sunset_AMP_Gallery_Embed_Handler';
 		unset($handlers[ $needle ]);
 		$handlers[$galleryHandler] = array();
+    $handlers['Sunset_AMP_JWPlayer_Embed_Handler'] = array();
 		return $handlers;
 	}
 
