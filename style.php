@@ -398,10 +398,12 @@ amp-carousel {
 }
 .dek {
     color: #282f2f;
-    font-size: 18px;
-    line-height: 28px;
+    font-size: 16px;
     font-weight: bold;
     text-align: center;
+}
+:root {
+  --content-gutter: 1ch;
 }
 .padded {
   padding-left: 24px;
@@ -418,7 +420,7 @@ amp-carousel {
   margin: inherit 24px;
 }
 .intro.article-info {
-  padding: 0;
+  padding: 0 var(--content-gutter);
   margin-top: 11px;
 }
 .intro.article-info h1 {
@@ -437,10 +439,7 @@ amp-carousel .slide .caption {
 amp-carousel .caption.scroll-box {
   max-height: 50%; 
   background: azure;
-  padding-right: 1vw;
-}
-:root {
-  --content-gutter: 1ch;
+  padding: 0 var(--content-gutter);
 }
 [class^="col-"] {
   padding: 0 var(--content-gutter); 
