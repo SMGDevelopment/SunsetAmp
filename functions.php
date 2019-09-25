@@ -29,7 +29,7 @@ add_amp_theme_support('AMP-related-posts');
 // Post Pagination
 add_amp_theme_support('AMP-post-pagination');
 
-amp_font('https://fonts.googleapis.com/css?family=Open+Sans:400,600|Merriweather:400,700');
+amp_font('https://fonts.googleapis.com/css?family=Nunito:700,700i|Nunito+Sans:400,400i,600&display=swap');
 require_once(dirname(__FILE__) . '/class-amp-gallery-embed.php');
 require_once(dirname(__FILE__) . '/class-amp-jwplayer-embed.php');
 require_once(dirname(__FILE__) . '/../../themes/sunset-magazine/includes/brightcove-override.php');

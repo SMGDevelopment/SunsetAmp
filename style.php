@@ -1,7 +1,7 @@
 /**** 
 * AMP Framework Reset
 *****/
-    body{ font-family: sans-serif; font-size: 16px; line-height:1.4; }
+    body{ font-family: "Nunito Sans", sans-serif; font-size: 16px; line-height:1.4; }
     ol, ul{ list-style-position: inside }
     p, ol, ul, figure{ margin: 0 0 1em; padding: 0; }
     a, a:active, a:visited{ color:#5EBCC2; text-decoration: none }
@@ -275,7 +275,7 @@
       left: 0;
     }
     figcaption .credit {
-        font-family: "Open Sans", Helvetica, sans-serif;
+        font-family: "Nunito", Helvetica, sans-serif;
         color: #686c73;
         font-size: 11px;
         margin-left: 0px;
@@ -291,14 +291,16 @@
     }
 
     figcaption .slide-info .counter {
-        font-family: "Open Sans", Helvetica, sans-serif;
+        font-family: "Nunito Sans", Helvetica, sans-serif;
         font-size: 12px;
         font-style: italic;
         font-weight: 700;
     }
+    h1,h2,h3,h4,h5,h6 {
+        font-family: "Nunito", Times, serif;
+    }
 
     h1.amp-post-title {
-        font-family: "Merriweather", Times, serif;
         font-weight: 700;
         font-size: 24px;
         line-height: 30px;
