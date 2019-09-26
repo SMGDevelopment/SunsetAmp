@@ -12,13 +12,13 @@ class Sunset_AMP_JWPlayer_Embed_Handler extends AMP_Base_Embed_Handler {
 	public function register_embed() {
     echo "<!-- registering embed -->";
 		add_shortcode( 'jwplayer', array( $this, 'shortcode' ) );
-		add_shortcode( 'bc_video', array( $this, 'bc_shortcode' ) );
+		// add_shortcode( 'bc_video', array( $this, 'bc_shortcode' ) );
 	}
 
 	public function unregister_embed() {
     echo "<!-- un_registering embed -->";
-		remove_shortcode( 'bc_video' );
 		remove_shortcode( 'jwplayer' );
+		// remove_shortcode( 'bc_video' );
 	}
 
 	public function get_scripts() {
@@ -39,7 +39,8 @@ class Sunset_AMP_JWPlayer_Embed_Handler extends AMP_Base_Embed_Handler {
     return $this->render($attr);
 	}
 
-	public function render( $id ) {
+	public function render( $attr ) {
+    $id= $attr[0];
     $html = <<<___
       <amp-jwplayer
         data-player-id="WULyWvHs"

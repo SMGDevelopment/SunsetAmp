@@ -32,7 +32,7 @@ add_amp_theme_support('AMP-post-pagination');
 amp_font('https://fonts.googleapis.com/css?family=Nunito:700,700i|Nunito+Sans:400,400i,600&display=swap');
 require_once(dirname(__FILE__) . '/class-amp-gallery-embed.php');
 require_once(dirname(__FILE__) . '/class-amp-jwplayer-embed.php');
-require_once(dirname(__FILE__) . '/../../themes/sunset-magazine/includes/brightcove-override.php');
+# require_once(dirname(__FILE__) . '/../../themes/sunset-magazine/includes/brightcove-override.php');
 define("__GALLLERY_CROP__", "nl_landscape");
 define("__URL_KEY__", "url");
 
