@@ -315,8 +315,9 @@ amp-carousel {
   margin-bottom: 10px;
 }
 
-.caption {
-  padding: 0 10px;
+
+figcaption.caption {
+  padding: 0.5em 1ch;
 }
 
 .scroll-box {
@@ -429,7 +430,7 @@ amp-carousel .slide .caption {
 amp-carousel .caption.scroll-box {
   max-height: 50%; 
   background: azure;
-  padding-right: 1vw;
+
 }
 .cooked-direction-number {display: none;}
 /****

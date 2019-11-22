@@ -51,9 +51,17 @@ class AmpSite extends TimberSite {
 		add_action('ampforwp_global_after_footer', array( $this, 'after_footer') );
 		add_action('amp_post_template_head', array($this, 'post_head'));
 		add_filter('amp_post_template_metadata', array($this, 'metadata'), 30, 1);
+    add_filter( 'amp_content_sanitizers', array($this, 'amp_slideshow_sanitizer'), 10, 2 );
 
 		$this->context = Timber::get_context();
 	}
+
+  function amp_slideshow_sanitizer ($sanitizer_classes, $post) {
+    require_once( dirname( __FILE__ ) . '/class-amp-slideshow-sanitizer.php' );
+    $sanitizer_classes['AMPFORWP_Slideshow_Sanitizer'] = array();
+    return $sanitizer_classes;
+
+  }
 
 	function set_template_data($data) {
 		$data['amp_component_scripts']['amp-ad'] = "https://cdn.ampproject.org/v0/amp-ad-0.1.js";
