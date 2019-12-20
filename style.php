@@ -1,7 +1,7 @@
 /**** 
 * AMP Framework Reset
 *****/
-    body{ font-family: sans-serif; font-size: 16px; line-height:1.4; }
+    body{ font-family: "Nunito Sans", sans-serif; font-size: 16px; line-height:1.4; }
     ol, ul{ list-style-position: inside }
     p, ol, ul, figure{ margin: 0 0 1em; padding: 0; }
     a, a:active, a:visited{ color:#5EBCC2; text-decoration: none }
@@ -138,6 +138,7 @@
 }
 .header {
     border-bottom: 1px solid #d7d7d9;
+  overflow: hidden;
 }
     .header h1{
         font-size: 1.5em;
@@ -274,7 +275,7 @@
       left: 0;
     }
     figcaption .credit {
-        font-family: "Open Sans", Helvetica, sans-serif;
+        font-family: "Nunito", Helvetica, sans-serif;
         color: #686c73;
         font-size: 11px;
         margin-left: 0px;
@@ -290,14 +291,16 @@
     }
 
     figcaption .slide-info .counter {
-        font-family: "Open Sans", Helvetica, sans-serif;
+        font-family: "Nunito Sans", Helvetica, sans-serif;
         font-size: 12px;
         font-style: italic;
         font-weight: 700;
     }
+    h1,h2,h3,h4,h5,h6 {
+        font-family: "Nunito", Times, serif;
+    }
 
     h1.amp-post-title {
-        font-family: "Merriweather", Times, serif;
         font-weight: 700;
         font-size: 24px;
         line-height: 30px;
@@ -398,10 +401,12 @@ figcaption.caption {
 }
 .dek {
     color: #282f2f;
-    font-size: 18px;
-    line-height: 28px;
+    font-size: 16px;
     font-weight: bold;
     text-align: center;
+}
+:root {
+  --content-gutter: 1ch;
 }
 .padded {
   padding-left: 24px;
@@ -418,7 +423,14 @@ figcaption.caption {
   margin: inherit 24px;
 }
 .intro.article-info {
-  padding: 8px 16px;
+  padding: 0 var(--content-gutter);
+  margin-top: 11px;
+}
+.intro.article-info h1 {
+margin: 22px 0 0;
+}
+.boldgrid-section {
+margin-top: 11px;
 }
 
 amp-carousel .slide amp-img {
@@ -430,7 +442,20 @@ amp-carousel .slide .caption {
 amp-carousel .caption.scroll-box {
   max-height: 50%; 
   background: azure;
-
+  padding: 0 var(--content-gutter);
+}
+[class^="col-"] {
+  padding: 0 var(--content-gutter); 
+}
+[class^="col-"] amp-carousel,
+[class^="col-"] amp-jwplayer
+{
+  margin: 0 calc(-1 * var(--content-gutter));
+}
+[class^="col-"] > * + * {
+  margin-top: 22px;
+  margin-bottom: 0;
+  
 }
 .cooked-direction-number {display: none;}
 /****
