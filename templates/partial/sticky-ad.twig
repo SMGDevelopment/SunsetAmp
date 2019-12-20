@@ -2,6 +2,7 @@
 	<amp-ad width="{{width|default(320)}}"
       		height="{{height|default(50)}}"
       	  	type="doubleclick"
+            json='{"targeting": {{ function('urldecode', ad_info.targeting) }} }'
       	    data-slot="{{ad_info.slot}}">
 	</amp-ad>
 </amp-sticky-ad>
