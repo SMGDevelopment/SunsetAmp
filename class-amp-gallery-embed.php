@@ -166,8 +166,11 @@ class Sunset_AMP_Gallery_Embed_Handler extends AMP_Gallery_Embed_Handler {
 
 	private function build_gallery_slide($image, $index, $total) {
 
+    global $sunset_amp_site;
 		$timber = new TimberImage($image['id']);
-		$tag = AMP_HTML_Utils::build_tag(
+    $ads = $sunset_amp_site->context['ad_info'];
+		$tag =
+    AMP_HTML_Utils::build_tag(
 			'amp-img',
 			array(
 				'src' => $image['url'],
@@ -175,7 +178,23 @@ class Sunset_AMP_Gallery_Embed_Handler extends AMP_Gallery_Embed_Handler {
 				'height' => $image['height'],
 				'layout' => 'responsive',
 			)
-		) . $this->build_gallery_caption( $image, $index, $total ); 
+		).
+    AMP_HTML_Utils::build_tag(
+      'div',
+      array(
+        'class' => 'amp-ad-wrapper',
+      ),
+      AMP_HTML_Utils::build_tag(
+        'amp-ad',
+        array(
+          'height' => 50,
+          'width' => 320,
+          'type' => 'doubleclick',
+          'data-slot' => $sunset_amp_site->context['ad_info']['slot']
+        )
+      )
+    ).
+    $this->build_gallery_caption( $image, $index, $total ); 
 		return '<div class="slide">'. $tag  . '</div>';
 	}
 }
