@@ -52,6 +52,7 @@ class AMPFORWP_Slideshow_Sanitizer extends AMP_Base_Sanitizer {
   }
 
   private function getSlideFromAttribute($slide) {
+    global $sunset_amp_site;
     return '<div class="slide">' . AMP_HTML_Utils::build_tag(
       'amp-img',
       array(
@@ -60,7 +61,23 @@ class AMPFORWP_Slideshow_Sanitizer extends AMP_Base_Sanitizer {
         'height' => 463,
         'layout' => 'responsive',
       )
-    ) . Timber::compile('templates/partial/caption.twig', $slide) . '</div>';
+    ) .
+    AMP_HTML_Utils::build_tag(
+      'div',
+      array(
+        'class' => 'amp-ad-wrapper',
+      ),
+      AMP_HTML_Utils::build_tag(
+        'amp-ad',
+        array(
+          'height' => 50,
+          'width' => 320,
+          'type' => 'doubleclick',
+          'data-slot' => $sunset_amp_site->context['ad_info']['slot']
+        )
+      )
+    ) .
+    Timber::compile('templates/partial/caption.twig', $slide) . '</div>';
   }
 
   private function getAttributesBySlide($slide) {
