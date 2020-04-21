@@ -6,7 +6,10 @@ class AMPFORWP_Slideshow_Sanitizer extends AMP_Base_Sanitizer {
 
     return array( 
       'amp-list' => 'https://cdn.ampproject.org/v0/amp-list-0.1.js',
-      'amp-carousel' => 'https://cdn.ampproject.org/v0/amp-carousel-0.1.js' );
+      'amp-carousel' => 'https://cdn.ampproject.org/v0/amp-carousel-0.1.js',
+      'amp-bind' => 'https://cdn.ampproject.org/v0/amp-bind-0.1.js'
+    );
+
   }
 
   public function sanitize() {
@@ -14,7 +17,7 @@ class AMPFORWP_Slideshow_Sanitizer extends AMP_Base_Sanitizer {
     $slideshow = AMP_DOM_Utils::create_node( $this->dom, 'amp-carousel', array(
       'id' => 'gallery-images',
       'width' => 694,
-      'height' => 883,
+      'height' => 1083,
       'layout' => 'responsive',
       'type' => 'slides',
       'on' => 'slideChange:AMP.setState({selectedSlide: event.index})',
@@ -53,12 +56,13 @@ class AMPFORWP_Slideshow_Sanitizer extends AMP_Base_Sanitizer {
 
   private function getSlideFromAttribute($slide) {
     global $sunset_amp_site;
-    return '<div class="slide">' . AMP_HTML_Utils::build_tag(
+    return '<div class="slide">' .
+      AMP_HTML_Utils::build_tag(
       'amp-img',
       array(
         'src' => $slide['image'],
-        'width' => 694,
-        'height' => 463,
+        'width' => $slide['width'] ?: 694,
+        'height' => $slide['height'] ?: 463,
         'layout' => 'responsive',
       )
     ) .
@@ -87,12 +91,15 @@ class AMPFORWP_Slideshow_Sanitizer extends AMP_Base_Sanitizer {
       "total" => "//span[@class=\"total-slides\"]",
       "credit" => "//span[@class=\"credit\"]",
       "image" => "//div[contains(@class, 'lazy-image')]/@data-src",
-      "deck" => "//div[contains(@class, 'caption')]"
+      "deck" => "//div[contains(@class, 'caption')]",
+      'width' => '/*/@data-crop-width',
+      'height' => '/*/@data-crop-height',
     );
     $docFrag = new DOMDocument();
     $node = $docFrag->importNode($slide, true);
     $docFrag->appendChild($node);
     $finder = new DomXPath($docFrag);
+
     
     foreach($attributes as $key=>$selector){
       $el = $finder->query($selector);
@@ -103,7 +110,6 @@ class AMPFORWP_Slideshow_Sanitizer extends AMP_Base_Sanitizer {
         $slideContent[$key] = $el->item(0)->nodeValue;
       }
     }
-
     return $slideContent;
   }
 }
