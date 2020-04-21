@@ -434,10 +434,10 @@ margin-top: 11px;
 }
 
 amp-carousel .slide amp-img {
-  max-height: 70%;
+  max-height: calc(70% - 76px);
 }
 amp-carousel .slide .caption {
-  max-height: 20%;
+  height: 30%;
 }
 amp-carousel .caption.scroll-box {
   background: azure;
